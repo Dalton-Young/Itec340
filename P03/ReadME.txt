@@ -1,0 +1,1 @@
+Use java CatalogDriver < TESTS.txt

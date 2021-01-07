@@ -1,0 +1,12 @@
+cua bob smith bsmith@gmail.com
+gui bsmith@gmail.com
+atc 5002 103
+rfc 5002 103
+atc 5002 103
+ubs 5002 103 "Read"
+aaf 103 101
+gbi -title "Clear"
+gbi -author "Tom Clancy"
+gbi -id 5002
+rrb 5002 103 3 "Great book"
+quit
