@@ -6,50 +6,45 @@ import java.sql.*;
 import java.util.*;
 
 class CatalogCtrl {
+
   private DataSource data;
 
   public CatalogCtrl() throws SQLException {
-    try{
-       data = new DataSource();}
-    catch (SQLException e) {
+    try {
+      data = new DataSource();
+    } catch (SQLException e) {
       System.out.println("Could not Do stuff" + e);
     }
   }
+
   /**
    * help() -- Displays List of valid commands
    *
    * EX:help
    */
   public String help() {
-    return "help –	display a list of commands available to the user. Only list commands that have been implemented. \n" +
-    
-    "quit – quit the application.\n"+
-    
-    "cua – create user account\n"+
-    "cua bob smith bsmith@gmail.com\n"+
-    
-    "gui – get user ID\n"+ 
-    "gui bsmith@gmail.com\n"+
-    
-    "atc – add to catalog\n"+ 
-    "atc 5021 123\n"+ 
-    
-    "rfc – remove from catalog\n"+ 
-    "rfc 5021 123\n"+
-    
-    "rrb – rate and review book\n"+
-    "rrb 5021 123 3 Great book \n"+
-    
-    "ubs – update book status \n"+
-    "ubs 5021 123 Want to Read \n"+
-    
-    "aaf – add a friend\n"+ 
-    "aaf 123 125\n"+
-    
-    "gbi - Get Book Information takes one option: -title, -author, or -id.\n"+  
-    "gbi  -title Clear and Present Danger\n"+ 
-    "gbi  -author Tom Clancy\n"+ 
-    "gbi  -id 5021";
+    return (
+      "help –	display a list of commands available to the user. Only list commands that have been implemented. \n" +
+      "quit – quit the application.\n" +
+      "cua – create user account\n" +
+      "cua bob smith bsmith@gmail.com\n" +
+      "gui – get user ID\n" +
+      "gui bsmith@gmail.com\n" +
+      "atc – add to catalog\n" +
+      "atc 5021 123\n" +
+      "rfc – remove from catalog\n" +
+      "rfc 5021 123\n" +
+      "rrb – rate and review book\n" +
+      "rrb 5021 123 3 Great book \n" +
+      "ubs – update book status \n" +
+      "ubs 5021 123 Want to Read \n" +
+      "aaf – add a friend\n" +
+      "aaf 123 125\n" +
+      "gbi - Get Book Information takes one option: -title, -author, or -id.\n" +
+      "gbi  -title Clear and Present Danger\n" +
+      "gbi  -author Tom Clancy\n" +
+      "gbi  -id 5021"
+    );
   }
 
   /**
@@ -58,12 +53,12 @@ class CatalogCtrl {
    * EX:quit
    */
   public void quit() throws SQLException {
-    try{
+    try {
       data.close();
-    System.exit(0);}
-   catch (SQLException e) {
-    System.out.println("Could not Close: " + e);
-  }
+      System.exit(0);
+    } catch (SQLException e) {
+      System.out.println("Could not Close: " + e);
+    }
   }
 
   /**
@@ -90,8 +85,7 @@ class CatalogCtrl {
     Integer wow = -1;
     try {
       wow = data.find_user(args);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not Get User ID: " + e);
     }
     return wow;
@@ -104,11 +98,10 @@ class CatalogCtrl {
    * @param  Book_ISBN - Book ISBN
    * EX:atc 5021 123
    */
-  public void atc(ArrayList<String> args)  throws SQLException {
+  public void atc(ArrayList<String> args) throws SQLException {
     try {
       data.add_to_catalog(args);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not Add to Catalog: " + e);
     }
   }
@@ -120,11 +113,10 @@ class CatalogCtrl {
    * @param  Book_ISBN - Book ISBN
    * EX:rfc 5021 123
    */
-  public void rfc(ArrayList<String> args)  throws SQLException {
+  public void rfc(ArrayList<String> args) throws SQLException {
     try {
       data.remove_from_catalog(args);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not remove from Catalog: " + e);
     }
   }
@@ -138,11 +130,10 @@ class CatalogCtrl {
    * @param  Desc - Rating Description
    * EX:rrb 5021 123 3 “Great book”
    */
-  public void rrb(ArrayList<String> args)  throws SQLException {
+  public void rrb(ArrayList<String> args) throws SQLException {
     try {
       data.rate_book(args);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not rate Book: " + e);
     }
   }
@@ -155,14 +146,14 @@ class CatalogCtrl {
    * @param  Status - String of Status
    * EX:ubs 5021 123 “Want to Read”
    */
-  public void ubs(ArrayList<String> args)  throws SQLException {
+  public void ubs(ArrayList<String> args) throws SQLException {
     try {
       data.update_status(args);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not Update Status: " + e);
     }
   }
+
   /**
    * aaf(String User_ID, String Friend_ID) --Adds a friend
    *
@@ -170,11 +161,10 @@ class CatalogCtrl {
    * @param  Friend_ID - Friends User ID
    * EX:aaf 123 125
    */
-  public void aaf(ArrayList<String> args)  throws SQLException {
+  public void aaf(ArrayList<String> args) throws SQLException {
     try {
       data.add_friend(args);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not add friend: " + e);
     }
   }
@@ -186,11 +176,10 @@ class CatalogCtrl {
    * @param  Friend_ID - Friends User ID
    * EX:aaf 123 125
    */
-  public void gbi(ArrayList<String> args)throws SQLException {
+  public void gbi(ArrayList<String> args) throws SQLException {
     try {
       System.out.println(data.getBookInfo(args));
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Could not get book information: " + e);
     }
   }

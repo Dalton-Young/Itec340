@@ -4,30 +4,30 @@
  *
  */
 import java.io.*;
+import java.lang.*;
 import java.sql.*;
 import java.util.*;
-import java.util.regex.*;
-import java.lang.*;
 import java.util.Scanner;
+import java.util.regex.*;
 
 public class TextIO {
+
   private CatalogCtrl catalog_Ctrl;
 
-  public TextIO()throws SQLException {
-   catalog_Ctrl = new CatalogCtrl();
+  public TextIO() throws SQLException {
+    catalog_Ctrl = new CatalogCtrl();
   }
-
 
   public void run_catalog() throws SQLException {
     try {
       display("Catalog System Running");
-    Scanner scan = new Scanner(System.in);
-    String input = "";
-    ArrayList<String> args = null;
-    if(scan.hasNext()){
-    input = scan.nextLine();
-    args = listifyInput(input);
-    }
+      Scanner scan = new Scanner(System.in);
+      String input = "";
+      ArrayList<String> args = null;
+      if (scan.hasNext()) {
+        input = scan.nextLine();
+        args = listifyInput(input);
+      }
       int status = 1;
 
       while (status == 1) {
@@ -75,20 +75,18 @@ public class TextIO {
           default:
             display("Invalid command: " + command);
         }
-        try{
+        try {
           Thread.sleep(2000);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
           System.out.println(e);
-       }
-       input = scan.nextLine();
-       args = listifyInput(input);
+        }
+        input = scan.nextLine();
+        args = listifyInput(input);
       }
-    }catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println("Error" + e);
-    }}
-  
-
+    }
+  }
 
   /**
    * display() -- displays the given string to the screen.
@@ -109,26 +107,20 @@ public class TextIO {
     ArrayList<String> args = new ArrayList<String>();
     Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
     Matcher regexMatcher = regex.matcher(input);
-    while (regexMatcher.find()){
+    while (regexMatcher.find()) {
       if (regexMatcher.group(1) != null) {
-         // Add double-quoted string without the quotes
-         args.add(regexMatcher.group(1));
-     } else if (regexMatcher.group(2) != null) {
-         // Add single-quoted string without the quotes
-         args.add(regexMatcher.group(2));
-     } else {
-         // Add unquoted word
-         args.add(regexMatcher.group());
-     }
+        // Add double-quoted string without the quotes
+        args.add(regexMatcher.group(1));
+      } else if (regexMatcher.group(2) != null) {
+        // Add single-quoted string without the quotes
+        args.add(regexMatcher.group(2));
+      } else {
+        // Add unquoted word
+        args.add(regexMatcher.group());
+      }
     }
     //System.out.println(args);
-      //args.add(regexMatcher.group(1)).replace("\"", "");
+    //args.add(regexMatcher.group(1)).replace("\"", "");
     return args;
   }
-
-  
-    
-    
-    
-  
 }
