@@ -26,7 +26,7 @@ class DataSource {
     DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
     String user, pass;
     user = "dyoung54";
-    pass = "Prohunter900852578";
+    pass = "*";
     try {
       conn =
         DriverManager.getConnection(
